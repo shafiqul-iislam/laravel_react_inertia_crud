@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -13,7 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Inertia::render('pages/posts/all');
+        return Inertia::render('Posts/Index', [
+            'posts' => Post::with('user')->get()
+        ]);
     }
 
     /**
@@ -21,7 +24,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Posts/Create');
     }
 
     /**
@@ -29,7 +32,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'user_id' => Auth::user()->id
+        ]);
+
+        return redirect('/posts');
     }
 
     /**
