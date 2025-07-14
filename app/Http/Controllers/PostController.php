@@ -47,19 +47,13 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        return Inertia::render('Posts/Edit', [
+            'editPost' => Post::findOrFail($id)
+        ]);
     }
 
     /**
@@ -73,8 +67,11 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $deletePost = Post::findOrFail($id);
+        $deletePost->delete();
+
+        return redirect('/posts');
     }
 }

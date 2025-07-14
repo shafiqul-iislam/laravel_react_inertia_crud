@@ -9,19 +9,19 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Posts() {
+export default function Posts({ posts }: any) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Posts" />
             <div className="container ms-auto p-4">
                 <div className="flex items-center justify-between mb-9">
                     <h2 className="text-2xl">Blog Posts</h2>
-                    <Link href="/post-create" className="btn">Create Post</Link>
+                    <Link href="/create-post" className="btn">Create Post</Link>
                 </div>
                 <div className="overflow-x-auto my-6">
                     <table className="table table-compact w-full">
                         <thead>
-                            <tr>
+                            <tr className='text-end'>
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Content</th>
@@ -31,14 +31,21 @@ export default function Posts() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            {posts.map((post: any) => (
+                                <tr key={post.id} className='text-end'>
+                                    <td>{post.id}</td>
+                                    <td>{post.title}</td>
+                                    <td>{post.content}</td>
+
+                                    {/* orm relationship */}
+                                    <td>{post.user?.name || ''}</td>
+                                    <td>{post.created_at}</td>
+                                    <td>
+                                        <Link href={`/edit-post/${post.id}`} className="btn btn-primary mr-3">Edit</Link>
+                                        <Link href={`/delete-post/${post.id}`} method="delete" className="btn btn-black mr-2">Delete</Link>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

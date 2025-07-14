@@ -17,7 +17,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('posts', [PostController::class, 'index'])->name('posts');
-    Route::get('post-create', [PostController::class, 'create'])->name('post-create');
+    Route::get('create-post', [PostController::class, 'create'])->name('create-post');
+    Route::post('add-post', [PostController::class, 'store'])->name('add-post');
+    Route::get('edit-post/{id}', [PostController::class, 'edit'])->name('edit-post');
+    Route::delete('delete-post/{id}', [PostController::class, 'destroy'])->name('delete-post');
     
 });
 
