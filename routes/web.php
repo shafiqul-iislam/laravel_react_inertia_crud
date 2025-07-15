@@ -1,5 +1,35 @@
 <?php
 
+// class Fish
+// {
+//     public function swim()
+//     {
+//         return 'swimming';
+//     }
+
+//     public function eat()
+//     {
+//         return 'eating';
+//     }
+// }
+
+// app()->bind('Fish', function () {
+//     return new Fish();
+// });
+
+// class FishFacade{
+//     public static function __callStatic($name, $arguments)
+//     {
+//         // $name here we pass function name, with this class resolved this Fish 
+//         // we can get the functions of the Fish class
+//         return app()->make('Fish')->$name();
+//     }
+// }
+
+// dd(FishFacade::eat());
+
+################################### ROUTES ###################################
+
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -22,8 +52,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-post/{id}', [PostController::class, 'edit'])->name('edit-post');
     Route::put('update-post', [PostController::class, 'update'])->name('update-post');
     Route::delete('delete-post/{id}', [PostController::class, 'destroy'])->name('delete-post');
-    
 });
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';
