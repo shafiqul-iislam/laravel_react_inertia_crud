@@ -42,7 +42,7 @@ export default function Posts({ posts }: any) {
                                     <td>{post.created_at}</td>
                                     <td>
                                         <Link href={`/edit-post/${post.id}`} className="btn btn-primary mr-3">Edit</Link>
-                                        <Link href={`/delete-post/${post.id}`} method="delete" className="btn btn-black mr-2">Delete</Link>
+                                        <Link href={`/delete-post/${post.id}`} method="delete" className="btn btn-black mr-2 cursor-pointer">Delete</Link>
                                     </td>
                                 </tr>
                             ))}

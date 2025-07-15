@@ -9,17 +9,18 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-const Edit = () => {
+const Edit = ({ editPost }: any) => {
 
     // useForm is instence of inertia
-    const { data, setData, post, reset, errors, processing } = useForm({ // use that instead of useState
-        title: '',
-        content: '',
+    const { data, setData, put, reset, errors, processing } = useForm({ // use that instead of useState
+        id: editPost.id,
+        title: editPost.title,
+        content: editPost.content,
     });
 
     const submitForm = (e: React.FormEvent) => {
         e.preventDefault();
-        post('/add-post', {
+        put('/update-post', {
             onSuccess: () => {
                 reset('title', 'content');
             }
@@ -61,7 +62,7 @@ const Edit = () => {
                             type="submit"
                             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition cursor-pointer"
                         >
-                            Submit
+                            {processing ? 'Processing...' : 'Submit'}
                         </button>
                     </form>
                 </div>
