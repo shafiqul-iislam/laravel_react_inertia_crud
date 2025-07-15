@@ -25,6 +25,7 @@ export default function Posts({ posts }: any) {
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Content</th>
+                                <th>Image</th>
                                 <th>User</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
@@ -36,6 +37,15 @@ export default function Posts({ posts }: any) {
                                     <td>{post.id}</td>
                                     <td>{post.title}</td>
                                     <td>{post.content}</td>
+
+                                    <td className="flex items-center justify-end">
+                                        {post.image && (
+                                            <img src={`/storage/${post.image}`}  
+                                                alt={post.title}                                              
+                                                className="w-24 h-16 object-cover rounded-lg"
+                                            />
+                                        )}
+                                    </td>
 
                                     {/* orm relationship */}
                                     <td>{post.user?.name || ''}</td>

@@ -37,10 +37,16 @@ class PostController extends Controller
             'content' => 'required'
         ]);
 
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public');
+        }
+
         Post::create([
             'title' => $request->title,
             'content' => $request->content,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'image' => $imagePath
         ]);
 
         return redirect('/posts');

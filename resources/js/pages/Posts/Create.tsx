@@ -15,13 +15,14 @@ const Create = () => {
     const { data, setData, post, reset, errors, processing } = useForm({ // use that instead of useState
         title: '',
         content: '',
+        image: null,
     });
 
     const submitForm = (e: React.FormEvent) => {
         e.preventDefault();
         post('/add-post', {
             onSuccess: () => {
-                reset('title', 'content');
+                reset('title', 'content', 'image');
             }
         });
     }
@@ -35,7 +36,7 @@ const Create = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                    <form onSubmit={submitForm} className="space-y-4">
+                    <form onSubmit={submitForm} className="space-y-4" method='POST' encType='multipart/form-data'>
                         <div>
                             <label className="block text-gray-700 mb-1">Title</label>
                             <input
@@ -57,6 +58,18 @@ const Create = () => {
                                 placeholder="Write your post content here..."
                             ></textarea>
                         </div>
+
+                        <div>
+                            <label className="block text-gray-700 mb-1">Image</label>
+                            <input
+                                type="file"
+                                name='image'
+                                onChange={(e) => setData('image', e.target.files[0])}
+                                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                placeholder="Enter post title"
+                            />
+                        </div>
+
                         <button
                             type="submit"
                             className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition cursor-pointer"
