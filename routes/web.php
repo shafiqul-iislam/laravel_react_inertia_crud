@@ -13,20 +13,65 @@
 //     }
 // }
 
-// app()->bind('Fish', function () {
+// app()->bind('Fish', function () { // bind this with container
 //     return new Fish();
 // });
 
-// class FishFacade{
-//     public static function __callStatic($name, $arguments)
+// class Bike
+// {
+//     public function start()
 //     {
-//         // $name here we pass function name, with this class resolved this Fish 
-//         // we can get the functions of the Fish class
-//         return app()->make('Fish')->$name();
+//         return 'starting';
 //     }
 // }
 
+// app()->bind('Bike', function () { // resolve this with container
+//     return new Bike();
+// });
+
+
+// // general facade class, as like laravel facade
+// class Facade
+// {
+//     public static function __callStatic($name, $arguments)
+//     {
+//         // dynamic name of a function
+//         // resolve the function with container
+//         return app()->make(static::getFacadeAccessor())->$name(); // static:: as like $this
+//     }
+
+//     public function getFacadeAccessor() {}
+// }
+
+
+
+// class FishFacade extends Facade
+// {
+//     // override the getFacadeAccessor method
+//     public function getFacadeAccessor()
+//     {
+//         return 'Fish';
+//     }
+
+
+//     // public static function __callStatic($name, $arguments)
+//     // {
+//     //     // $name here we pass function name, with this class resolved this Fish 
+//     //     // we can get the functions of the Fish class
+//     //     return app()->make('Fish')->$name();
+//     // }
+// }
+
+
+// class BikeFacade extends Facade
+// {
+//     public function getFacadeAccessor()
+//     {
+//         return 'Bike';
+//     }
+// }
 // dd(FishFacade::eat());
+// dd(BikeFacade::start());
 
 ################################### ROUTES ###################################
 
